@@ -6,12 +6,13 @@ import { Card } from 'antd';
 import RepositoryCard from './repository-card';
 
 const RepositoryList: FC = observer(() => {
-  const { repositoriesStore } = useStores();
+  const { repositoriesStore, paginationStore } = useStores();
+  const { currentPage } = paginationStore;
   const { fetchRepositories, isLoading, items } = repositoriesStore;
 
   useEffect(() => {
-    fetchRepositories(2);
-  }, []);
+    fetchRepositories(currentPage);
+  }, [currentPage, fetchRepositories]);
 
   if (isLoading) {
     return <Card loading={isLoading} />;

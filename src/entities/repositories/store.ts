@@ -12,7 +12,6 @@ export class RepositoriesStore {
   }
 
   fetchRepositories = async (page: number) => {
-    this.items = [];
     this.isLoading = true;
     const data = await RepositoriesService.fetchList(page);
 
@@ -23,5 +22,17 @@ export class RepositoriesStore {
       }
       this.isLoading = false;
     });
+  };
+}
+
+export class PaginationStore {
+  currentPage = 1;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  onChange = (page: number) => {
+    this.currentPage = page;
   };
 }

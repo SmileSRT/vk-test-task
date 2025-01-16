@@ -1,13 +1,24 @@
 import type { FC } from 'react';
 import styles from './styles/footer.module.css';
 import { Pagination } from 'antd';
+import { useStores } from '../../app/store-provider';
+import { observer } from 'mobx-react-lite';
 
-const FooterPagination: FC = () => {
+const FooterPagination: FC = observer(() => {
+  const { paginationStore, repositoriesStore } = useStores();
+  const { currentPage, onChange } = paginationStore;
+  const { totalCount } = repositoriesStore;
+
   return (
     <footer className={styles.container}>
-      <Pagination />
+      <Pagination
+        total={totalCount}
+        pageSize={30}
+        current={currentPage}
+        onChange={onChange}
+      />
     </footer>
   );
-};
+});
 
 export default FooterPagination;
