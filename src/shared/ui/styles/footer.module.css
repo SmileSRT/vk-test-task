@@ -1,0 +1,11 @@
+.container {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.075);
+  padding: 5px 20px;
+  width: 100vw;
+}
