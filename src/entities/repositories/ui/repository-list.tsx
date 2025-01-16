@@ -1,8 +1,11 @@
 import { observer } from 'mobx-react-lite';
 import { type FC, useEffect } from 'react';
 import { useStores } from '../../../app/store-provider';
+import styles from './styles/list.module.css';
+import { Card } from 'antd';
+import RepositoryCard from './repository-card';
 
-const RepositoryCards: FC = observer(() => {
+const RepositoryList: FC = observer(() => {
   const { repositoriesStore } = useStores();
   const { fetchRepositories, isLoading, items } = repositoriesStore;
 
@@ -11,16 +14,18 @@ const RepositoryCards: FC = observer(() => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Card loading={isLoading} />;
   }
 
   return (
-    <ul>
+    <ul className={styles.list}>
       {items.map(item => (
-        <li key={item.id}>{item.name}</li>
+        <li key={item.id} className={styles.list__item}>
+          <RepositoryCard {...item} />
+        </li>
       ))}
     </ul>
   );
 });
 
-export default RepositoryCards;
+export default RepositoryList;

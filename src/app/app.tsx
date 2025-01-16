@@ -1,10 +1,10 @@
 import type { FC } from 'react';
-import RepositoryCards from '../entities/repositories/ui/repository-cards';
+import RepositoryList from '../entities/repositories/ui/repository-list';
 
 const App: FC = () => {
   return (
     <>
-      <RepositoryCards />
+      <RepositoryList />
     </>
   );
 };
