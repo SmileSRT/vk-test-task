@@ -11,14 +11,16 @@ export class RepositoriesStore {
     makeAutoObservable(this);
   }
 
-  fetchRepositories = async (page: number) => {
+  fetchRepositoriesPerPage = async (page: number, isLoadMoreData?: boolean) => {
     this.isLoading = true;
     const data = await RepositoriesService.fetchList(page);
 
     runInAction(() => {
       if (data) {
         this.totalCount = data.total_count;
-        this.items = data.items;
+        this.items = isLoadMoreData
+          ? [...this.items, ...data.items]
+          : data.items;
       }
       this.isLoading = false;
     });
