@@ -9,11 +9,12 @@ import { isLoadMoreData } from '../lib';
 const RepositoryList: FC = observer(() => {
   const { repositoriesStore, paginationStore } = useStores();
   const { currentPage, onChange } = paginationStore;
-  const { fetchRepositoriesPerPage, isLoading, items } = repositoriesStore;
+  const { fetchRepositoriesPerPage, isLoading, items, fetchParams } =
+    repositoriesStore;
 
   useEffect(() => {
-    fetchRepositoriesPerPage(currentPage, isLoadMoreData());
-  }, [currentPage, fetchRepositoriesPerPage]);
+    fetchRepositoriesPerPage(currentPage, isLoadMoreData(), fetchParams);
+  }, [currentPage, fetchRepositoriesPerPage, fetchParams]);
 
   const handleScroll = useCallback(() => {
     if (!isLoadMoreData() || isLoading) {

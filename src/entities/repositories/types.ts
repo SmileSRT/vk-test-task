@@ -20,3 +20,26 @@ export interface IRepositoriesResponse {
   incomplete_results: boolean;
   items: IRepository[];
 }
+
+export interface IFetchParams {
+  query: string;
+  sort: sortVariantsType;
+  order: orderVariantsType;
+}
+
+export const sortVariant = {
+  STARS: 'stars',
+  FORKS: 'forks',
+  ISSUES: 'help-wanted-issues',
+  UPDATED: 'updated',
+} as const;
+
+export const orderVariant = {
+  ASC: 'asc',
+  DESC: 'desc',
+} as const;
+
+export type sortVariantsType = (typeof sortVariant)[keyof typeof sortVariant];
+
+export type orderVariantsType =
+  (typeof orderVariant)[keyof typeof orderVariant];

@@ -1,19 +1,28 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { IRepository } from './types';
+import type { IFetchParams, IRepository } from './types';
 import { RepositoriesService } from './api.service';
 
 export class RepositoriesStore {
   totalCount = 0;
   items: IRepository[] = [];
   isLoading = false;
+  fetchParams: IFetchParams = {
+    query: 'javascript',
+    sort: 'stars',
+    order: 'desc',
+  };
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  fetchRepositoriesPerPage = async (page: number, isLoadMoreData?: boolean) => {
+  fetchRepositoriesPerPage = async (
+    page: number,
+    isLoadMoreData: boolean,
+    fetchParams: IFetchParams,
+  ) => {
     this.isLoading = true;
-    const data = await RepositoriesService.fetchList(page);
+    const data = await RepositoriesService.fetchList(page, fetchParams);
 
     runInAction(() => {
       if (data) {
@@ -24,6 +33,14 @@ export class RepositoriesStore {
       }
       this.isLoading = false;
     });
+  };
+
+  deleteItem = (id: number) => {
+    this.items = this.items.filter(item => item.id !== id);
+  };
+
+  changeFetchParams = (fetchParams: IFetchParams) => {
+    this.fetchParams = fetchParams;
   };
 }
 
