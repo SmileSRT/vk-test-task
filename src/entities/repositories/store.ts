@@ -42,6 +42,18 @@ export class RepositoriesStore {
   changeFetchParams = (fetchParams: IFetchParams) => {
     this.fetchParams = fetchParams;
   };
+
+  saveItem = (id: number, login: string, description: string) => {
+    this.items = this.items.map(item => {
+      if (item.id === id) {
+        item.owner.login = login;
+        item.description = description;
+      }
+
+      return item;
+    });
+    console.log(this.items);
+  };
 }
 
 export class PaginationStore {
@@ -51,7 +63,7 @@ export class PaginationStore {
     makeAutoObservable(this);
   }
 
-  onChange = (page: number) => {
+  onChangePage = (page: number) => {
     this.currentPage = page;
   };
 }

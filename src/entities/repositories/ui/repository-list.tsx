@@ -8,7 +8,7 @@ import { isLoadMoreData } from '../lib';
 
 const RepositoryList: FC = observer(() => {
   const { repositoriesStore, paginationStore } = useStores();
-  const { currentPage, onChange } = paginationStore;
+  const { currentPage, onChangePage } = paginationStore;
   const { fetchRepositoriesPerPage, isLoading, items, fetchParams } =
     repositoriesStore;
 
@@ -20,8 +20,8 @@ const RepositoryList: FC = observer(() => {
     if (!isLoadMoreData() || isLoading) {
       return;
     }
-    onChange(currentPage + 1);
-  }, [currentPage, onChange, isLoading]);
+    onChangePage(currentPage + 1);
+  }, [currentPage, onChangePage, isLoading]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);

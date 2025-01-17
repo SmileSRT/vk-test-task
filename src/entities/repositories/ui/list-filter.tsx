@@ -1,5 +1,6 @@
 import { type FC } from 'react';
 import {
+  IFetchParams,
   orderVariant,
   orderVariantsType,
   sortVariant,
@@ -51,8 +52,14 @@ const orderOptions: IOrderOptions[] = [
 ];
 
 const FilterList: FC = observer(() => {
-  const { repositoriesStore } = useStores();
+  const { repositoriesStore, paginationStore } = useStores();
+  const { onChangePage } = paginationStore;
   const { fetchParams, changeFetchParams } = repositoriesStore;
+
+  const applyFilterParams = (params: IFetchParams) => {
+    changeFetchParams(params);
+    onChangePage(1);
+  };
 
   return (
     <section className={styles.filter__container}>
@@ -63,7 +70,7 @@ const FilterList: FC = observer(() => {
         style={{
           width: 200,
         }}
-        onChange={value => changeFetchParams({ ...fetchParams, sort: value })}
+        onChange={value => applyFilterParams({ ...fetchParams, sort: value })}
       />
 
       <Select
@@ -72,7 +79,7 @@ const FilterList: FC = observer(() => {
         style={{
           width: 200,
         }}
-        onChange={value => changeFetchParams({ ...fetchParams, order: value })}
+        onChange={value => applyFilterParams({ ...fetchParams, order: value })}
       />
     </section>
   );

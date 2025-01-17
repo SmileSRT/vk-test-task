@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 
 const FooterPagination: FC = observer(() => {
   const { paginationStore, repositoriesStore } = useStores();
-  const { currentPage, onChange } = paginationStore;
+  const { currentPage, onChangePage } = paginationStore;
   const { totalCount } = repositoriesStore;
 
   return (
@@ -15,7 +15,7 @@ const FooterPagination: FC = observer(() => {
         total={totalCount}
         pageSize={30}
         current={currentPage}
-        onChange={onChange}
+        onChange={onChangePage}
       />
     </footer>
   );
