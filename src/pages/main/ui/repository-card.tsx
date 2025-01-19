@@ -1,5 +1,4 @@
 import { Avatar, Card, Flex, Input } from 'antd';
-import type { IRepository } from '../types';
 import {
   BarChartOutlined,
   DeleteOutlined,
@@ -9,7 +8,8 @@ import {
   StarOutlined,
 } from '@ant-design/icons';
 import { useState, type FC } from 'react';
-import { useStores } from '../../../app/store-provider';
+import { useStores } from '../../../app/model/store-provider';
+import type { IRepository } from '../model/types';
 
 const CardTitle: FC<{ title: string; href: string }> = ({ title, href }) => (
   <Flex gap={5} align="center">

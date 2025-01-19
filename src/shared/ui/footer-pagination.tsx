@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import styles from './styles/footer.module.css';
 import { Pagination } from 'antd';
-import { useStores } from '../../app/store-provider';
+import { useStores } from '../../app/model/store-provider';
 import { observer } from 'mobx-react-lite';
 
 const FooterPagination: FC = observer(() => {

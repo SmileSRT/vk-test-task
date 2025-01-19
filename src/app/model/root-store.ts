@@ -1,7 +1,5 @@
-import {
-  PaginationStore,
-  RepositoriesStore,
-} from '../entities/repositories/store';
+import { PaginationStore } from '../../pages/main/model/pagination-store';
+import { RepositoriesStore } from '../../pages/main/model/repositories-store';
 
 export class RootStore {
   repositoriesStore: RepositoriesStore;

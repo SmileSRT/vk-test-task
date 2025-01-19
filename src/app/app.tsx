@@ -1,14 +1,8 @@
 import type { FC } from 'react';
-import RepositoryList from '../entities/repositories/ui/repository-list';
-import FilterList from '../entities/repositories/ui/list-filter';
+import MainPage from '../pages/main';
 
 const App: FC = () => {
-  return (
-    <>
-      <FilterList />
-      <RepositoryList />
-    </>
-  );
+  return <MainPage />;
 };
 
 export default App;

@@ -1,6 +1,11 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import type { IFetchParams, IRepository } from './types';
-import { RepositoriesService } from './api.service';
+import {
+  orderVariant,
+  sortVariant,
+  type IFetchParams,
+  type IRepository,
+} from './types';
+import { RepositoryService } from '../api/repository.service';
 
 export class RepositoriesStore {
   totalCount = 0;
@@ -8,8 +13,8 @@ export class RepositoriesStore {
   isLoading = false;
   fetchParams: IFetchParams = {
     query: 'javascript',
-    sort: 'stars',
-    order: 'desc',
+    sort: sortVariant.STARS,
+    order: orderVariant.DESC,
   };
 
   constructor() {
@@ -22,7 +27,7 @@ export class RepositoriesStore {
     fetchParams: IFetchParams,
   ) => {
     this.isLoading = true;
-    const data = await RepositoriesService.fetchList(page, fetchParams);
+    const data = await RepositoryService.fetchList(page, fetchParams);
 
     runInAction(() => {
       if (data) {
@@ -52,18 +57,5 @@ export class RepositoriesStore {
 
       return item;
     });
-    console.log(this.items);
-  };
-}
-
-export class PaginationStore {
-  currentPage = 1;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  onChangePage = (page: number) => {
-    this.currentPage = page;
   };
 }

@@ -1,15 +1,14 @@
 import { type FC } from 'react';
-import {
-  IFetchParams,
-  orderVariant,
-  orderVariantsType,
-  sortVariant,
-  sortVariantsType,
-} from '../types';
 import { Input, Select } from 'antd';
 import styles from './styles/filter.module.css';
 import { observer } from 'mobx-react-lite';
-import { useStores } from '../../../app/store-provider';
+import { useStores } from '../../../app/model/store-provider';
+import type {
+  IFetchParams,
+  orderVariantsType,
+  sortVariantsType,
+} from '../model/types';
+import { orderVariant, sortVariant } from '../model/types';
 
 interface ISortOptions {
   value: sortVariantsType;
@@ -63,7 +62,7 @@ const FilterList: FC = observer(() => {
 
   return (
     <section className={styles.filter__container}>
-      <Input value="javascript" disabled />
+      <Input value={fetchParams.query} disabled />
       <Select
         options={sortOptions}
         defaultValue={sortVariant.STARS}
