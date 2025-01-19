@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { type FC, useCallback, useEffect } from 'react';
-import { useStores } from '../../../app/store-provider';
+import { useStores } from '../../../app/model/store-provider';
 import styles from './styles/list.module.css';
 import { Card, Spin } from 'antd';
 import RepositoryCard from './repository-card';
